@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Aplica Poppins a tudo */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffe6f2;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #ff85b3;
+    border-radius: 50%;
+    animation: float 5s infinite ease-in-out;
+    opacity: 0.8;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #ff85b3;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -25px;
+    left: 0;
+}
+
+.heart::after {
+    left: 25px;
+    top: 0;
+}
+
+/* Posições iniciais dos corações */
+.heart1 {
+    top: 10%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.heart2 {
+    top: 30%;
+    left: 60%;
+    animation-delay: 1s;
+}
+
+.heart3 {
+    top: 50%;
+    left: 10%;
+    animation-delay: 2s;
+}
+
+.heart4 {
+    top: 80%;
+    left: 80%;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-20px) scale(1.2);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.envelope {
+    position: relative;
+    width: 500px; /* Aumenta a largura da carta */
+    height: 350px; /* Aumenta a altura da carta */
+    background-color: #f8b4d9;
+    border-radius: 10px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    overflow: hidden;
+    perspective: 1000px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease; /* Suaviza a animação ao passar o mouse */
+}
+
+/* Texto na frente da carta */
+.front-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 15px; /* Aumenta o tamanho da fonte */
+    color: #880e4f;
+    z-index: 2;
+    transition: opacity 0.3s ease; /* Suaviza a transição da opacidade */
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 120px;
+    background-color: #f06292;
+    border-bottom: 5px solid #ec407a;
+    border-radius: 0 0 50px 50px;
+    transform-origin: top;
+    transition: transform 1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Selo de coração */
+.seal-heart {
+    width: 70px; /* Aumenta o tamanho do selo */
+    height: 70px; /* Aumenta o tamanho do selo */
+    background-color: #ff1744;
+    position: absolute;
+    bottom: -35px; /* Ajusta a posição do selo */
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seal-heart::before,
+.seal-heart::after {
+    content: "";
+    position: absolute;
+    width: 70px; /* Aumenta o tamanho do selo */
+    height: 70px; /* Aumenta o tamanho do selo */
+    background-color: #ff1744;
+    border-radius: 50%;
+}
+
+.seal-heart::before {
+    top: -35px;
+    left: 0;
+}
+
+.seal-heart::after {
+    left: 35px;
+    top: 0;
+}
+
+.paper {
+    position: absolute;
+    top: 180px; /* Ajusta a posição do papel */
+    width: 90%;
+    left: 5%;
+    height: 240px; /* Aumenta a altura do papel */
+    background-color: #fff0f7;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(100%);
+    transition: transform 1s ease;
+    padding: 10px; /* Reduzido para melhor ajuste */
+    overflow: hidden; /* Garante que a barra de rolagem não apareça inicialmente */
+    z-index: 0;
+}
+
+/* Novo estilo para a mensagem oculta com barra de rolagem */
+.hidden-message {
+    max-height: 200px; /* Define uma altura máxima */
+    overflow-y: auto; /* Permite rolagem vertical */
+    opacity: 0;
+    font-size: 20px; /* Aumenta o tamanho da fonte do texto oculto */
+    line-height: 1.6;
+    color: #880e4f;
+    transition: opacity 2s ease;
+    scrollbar-width: thin; /* Para navegadores Firefox */
+}
+
+/* Para navegadores Webkit (Chrome, Safari, Edge) */
+.hidden-message::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+}
+
+.hidden-message::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Cor do fundo da barra de rolagem */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+.hidden-message::-webkit-scrollbar-thumb {
+    background: #ec407a; /* Cor do "polegar" da barra de rolagem */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+.hidden-message::-webkit-scrollbar-thumb:hover {
+    background: #d81b60; /* Cor do "polegar" ao passar o mouse */
+}
+
+.envelope.opened .flap {
+    transform: rotateX(-180deg);
+}
+
+.envelope.opened .paper {
+    transform: translateY(-50%);
+}
+
+.envelope.opened .hidden-message {
+    opacity: 1;
+}
+
+/* Faz o texto sumir ao abrir */
+.envelope.opened .front-text {
+    opacity: 0;
+}
+
+.envelope:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease; /* Suaviza a animação ao passar o mouse */
+}
